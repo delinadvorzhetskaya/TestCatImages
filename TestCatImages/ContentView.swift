@@ -8,9 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var buttonIsHidden = false
+    @ObservedObject var dataCats = CatImagesViewModel()
+    
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        NavigationView {
+            ScrollView(showsIndicators: false) {
+                ForEach(dataCats.images, id: \.self) {image in
+                    ImageScreen(image: image)
+                }
+            }
+            .navigationTitle("Cats")
+        }
     }
 }
 
@@ -19,3 +29,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
